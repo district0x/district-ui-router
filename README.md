@@ -117,10 +117,10 @@ Event to call [::watch-active-page](watch-active-page-fx) effect.
 Event to call [::unwatch-active-page](unwatch-active-page-fx) effect.
 
 #### <a name="navigate-evt">`::navigate`
-Event to call [::navigate](navigate-fx) effect.
+Event to call [::navigate](#navigate-fx) effect.
 
 #### <a name="replace-evt">`::replace`
-Event to call [::replace](replace-fx) effect.
+Event to call [::replace](#replace-fx) effect.
 
 ## district.ui.router.effects
 re-frame effects provided by this module
