@@ -1,11 +1,10 @@
-(defproject district0x/district-ui-router "1.0.0"
+(defproject district0x/district-ui-router "1.0.1"
   :description "district UI module for URI routing"
   :url "https://github.com/district0x/district-ui-router"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
   :dependencies [[funcool/bide "1.6.0"]
-                 [madvas/cemerick-url "0.1.2"]              ;; Temporary until cemerick merges PR26
                  [mount "0.1.11"]
                  [org.clojure/clojurescript "1.9.946"]
                  [re-frame "0.10.2"]]
