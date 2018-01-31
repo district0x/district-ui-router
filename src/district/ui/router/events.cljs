@@ -1,8 +1,9 @@
 (ns district.ui.router.events
   (:require
+    [day8.re-frame.forward-events-fx]
     [district.ui.router.effects :as effects]
     [district.ui.router.queries :as queries]
-    [re-frame.core :refer [reg-event-fx trim-v reg-fx inject-cofx]]))
+    [re-frame.core :refer [reg-event-fx trim-v]]))
 
 (def interceptors [trim-v])
 
@@ -14,12 +15,28 @@
            (queries/assoc-bide-router bide-router)
            (queries/assoc-html5 html5?))}))
 
+(reg-event-fx
+  ::active-page-changed*
+  interceptors
+  (fn [{:keys [:db]} [name params query]]
+    (if (queries/bide-router db)                            ;; Initial :on-navigate is fired before ::start
+      {:dispatch [::active-page-changed name params query]}
+      {:async-flow {:first-dispatch [::do-nothing*]
+                    :rules [{:when :seen?
+                             :events [::start]
+                             :dispatch [::active-page-changed name params query]}]}})))
+
 
 (reg-event-fx
   ::active-page-changed
   interceptors
   (fn [{:keys [:db]} [name params query]]
     {:db (queries/assoc-active-page db {:name name :params params :query query})}))
+
+
+(reg-event-fx
+  ::do-nothing*
+  (constantly nil))
 
 
 (reg-event-fx

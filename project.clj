@@ -1,10 +1,11 @@
-(defproject district0x/district-ui-router "1.0.1"
+(defproject district0x/district-ui-router "1.0.2"
   :description "district UI module for URI routing"
   :url "https://github.com/district0x/district-ui-router"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
-  :dependencies [[funcool/bide "1.6.0"]
+  :dependencies [[day8.re-frame/async-flow-fx "0.0.8"]
+                 [funcool/bide "1.6.0"]
                  [mount "0.1.11"]
                  [org.clojure/clojurescript "1.9.946"]
                  [re-frame "0.10.2"]]

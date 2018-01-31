@@ -2,10 +2,10 @@
   (:require
     [bide.core :as bide]
     [cljs.spec.alpha :as s]
+    [clojure.string :as string]
     [district.ui.router.events :as events]
     [mount.core :as mount :refer [defstate]]
-    [re-frame.core :refer [dispatch-sync dispatch]]
-    [clojure.string :as string]))
+    [re-frame.core :refer [dispatch-sync dispatch]]))
 
 (declare start)
 (declare stop)
@@ -35,7 +35,7 @@
                      :html5? html5?})]
     (bide/start! router {:html5? html5?
                          :default default-route
-                         :on-navigate #(dispatch [::events/active-page-changed %1 %2 %3])})
+                         :on-navigate #(dispatch [::events/active-page-changed* %1 %2 %3])})
     (dispatch-sync [::events/start opts])
     opts))
 

@@ -8,7 +8,7 @@ It also provides 2 [reagent](https://github.com/reagent-project/reagent) compone
 based on currently active page.
 
 ## Installation
-Add `[district0x/district-ui-router "1.0.1"]` into your project.clj  
+Add `[district0x/district-ui-router "1.0.2"]` into your project.clj  
 Include `[district.ui.router]` in your CLJS file, where you use `mount/start`
 
 ## API Overview
@@ -108,7 +108,7 @@ True if using HTML5 History.
 re-frame events provided by this module:
 
 #### <a name="active-page-changed-evt">`::active-page-changed`
-Event fired when active page has been changed. 
+Event fired when active page has been changed. Use this event to hook into event flow.  
 
 #### <a name="watch-active-page-evt">`::watch-active-page`
 Event to call [::watch-active-page](watch-active-page-fx) effect.
