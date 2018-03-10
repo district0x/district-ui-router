@@ -8,7 +8,7 @@ It also provides 2 [reagent](https://github.com/reagent-project/reagent) compone
 based on currently active page.
 
 ## Installation
-Add `[district0x/district-ui-router "1.0.2"]` into your project.clj  
+Add `[district0x/district-ui-router "1.0.3"]` into your project.clj  
 Include `[district.ui.router]` in your CLJS file, where you use `mount/start`
 
 ## API Overview

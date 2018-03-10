@@ -1,4 +1,4 @@
-(defproject district0x/district-ui-router "1.0.2"
+(defproject district0x/district-ui-router "1.0.3"
   :description "district UI module for URI routing"
   :url "https://github.com/district0x/district-ui-router"
   :license {:name "Eclipse Public License"

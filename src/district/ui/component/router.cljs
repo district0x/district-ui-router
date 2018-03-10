@@ -8,4 +8,5 @@
   (let [active-page (subscribe [::subs/active-page])]
     (fn []
       (let [{:keys [:name :params :query]} @active-page]
-        ^{:key (str name params query)} [page name]))))
+        (when name
+          ^{:key (str name params query)} [page name])))))
