@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/district0x/district-ui-router.svg?branch=master)](https://travis-ci.org/district0x/district-ui-router)
 
-Clojurescript [mount](https://github.com/tolitius/mount) + [re-frame](https://github.com/Day8/re-frame) module for a district UI,
+Clojurescript [re-mount](https://github.com/district0x/d0x-INFRA/blob/master/re-mount.md) module,
 that provides routing functionality for UI. This module currently utilises [bide](https://github.com/funcool/bide) routing library. 
 It also provides 2 [reagent](https://github.com/reagent-project/reagent) components helpful for switching pages in UI
 based on currently active page.
