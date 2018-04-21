@@ -1,5 +1,6 @@
 (ns district.ui.router.queries
-  (:require [bide.core :as bide]))
+  (:require [bide.core :as bide])
+  (:refer-clojure :exclude [resolve]))
 
 (def db-key :district.ui.router)
 
