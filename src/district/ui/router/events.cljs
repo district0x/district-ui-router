@@ -3,17 +3,19 @@
     [day8.re-frame.forward-events-fx]
     [district.ui.router.effects :as effects]
     [district.ui.router.queries :as queries]
-    [re-frame.core :refer [reg-event-fx trim-v]]))
+    [re-frame.core :refer [reg-event-fx trim-v]]
+    [district0x.re-frame.window-fx]))
 
 (def interceptors [trim-v])
 
 (reg-event-fx
   ::start
   interceptors
-  (fn [{:keys [:db]} [{:keys [:bide-router :html5?]}]]
+  (fn [{:keys [:db]} [{:keys [:bide-router :html5? :scroll-top?]}]]
     {:db (-> db
            (queries/assoc-bide-router bide-router)
-           (queries/assoc-html5 html5?))}))
+           (queries/assoc-html5 html5?)
+           (queries/assoc-scroll-top scroll-top?))}))
 
 (reg-event-fx
   ::active-page-changed*
@@ -57,7 +59,8 @@
   ::navigate
   interceptors
   (fn [{:keys [:db]} [name params query]]
-    {::effects/navigate [(queries/bide-router db) name params query]}))
+    (cond-> {::effects/navigate [(queries/bide-router db) name params query]}
+      (queries/scroll-top? db) (assoc :window/scroll-to [0 0]))))
 
 
 (reg-event-fx
@@ -72,4 +75,3 @@
   interceptors
   (fn [{:keys [:db]}]
     {:db (queries/dissoc-router db)}))
-

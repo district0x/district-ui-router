@@ -3,12 +3,14 @@
 [![Build Status](https://travis-ci.org/district0x/district-ui-router.svg?branch=master)](https://travis-ci.org/district0x/district-ui-router)
 
 Clojurescript [re-mount](https://github.com/district0x/d0x-INFRA/blob/master/re-mount.md) module,
-that provides routing functionality for UI. This module currently utilises [bide](https://github.com/funcool/bide) routing library. 
+that provides routing functionality for UI. This module currently utilises [bide](https://github.com/funcool/bide) routing library.
 It also provides 2 [reagent](https://github.com/reagent-project/reagent) components helpful for switching pages in UI
 based on currently active page.
 
 ## Installation
-Add `[district0x/district-ui-router "1.0.4"]` into your project.clj  
+
+Add `[district0x/district-ui-router "1.0.5"]` into your project.clj
+
 Include `[district.ui.router]` in your CLJS file, where you use `mount/start`
 
 ## API Overview
@@ -51,24 +53,25 @@ Include `[district.ui.router]` in your CLJS file, where you use `mount/start`
   - [match](#match-util)
 - [district.ui.component.page](#districtuicomponentpage)
 - [district.ui.component.router](#districtuicomponentrouter)
-  
+
 
 ## district.ui.router
 This namespace contains router [mount](https://github.com/tolitius/mount) module.
 
-You can pass following args to initiate this module: 
+You can pass following args to initiate this module:
 * `:routes` Routes as you'd pass them into bide library
 * `:default-route` Default route, passed as `:default` into bide library.
 * `:html5?` Pass true if you want to use HTML5 history. This option overrides `:html5-hosts`.
 * `:html5-hosts` Collection of hostnames for which HTML5 history should be used. You can also pass string of comma separated
-hostnames instead of collection. This is useful for defining hostnames in project.clj via `:closure-defines`. 
+* `:scroll-top?` When true will scroll window to top after navigation
+hostnames instead of collection. This is useful for defining hostnames in project.clj via `:closure-defines`.
 
 
 ```clojure
   (ns my-district.core
     (:require [mount.core :as mount]
               [district.ui.router]))
-              
+
   (-> (mount/with-args
         {:router {:routes [["/a" :route/a]
                            ["/b/:b" :route/b]]
@@ -84,16 +87,16 @@ re-frame subscriptions provided by this module:
 Returns active page. A map containing `:name` `:params` `:query`.
 
 #### <a name="active-page-name-sub">`::active-page-name`
-Returns route name of active page. 
+Returns route name of active page.
 
 #### <a name="active-page-params-sub">`::active-page-params`
 Returns params of active page.
 
 #### <a name="active-page-query-sub">`::active-page-query`
-Returns query of active page. 
+Returns query of active page.
 
 #### <a name="resolve-sub">`::resolve`
-Works as bide's `resolve`, but you don't need to pass router. 
+Works as bide's `resolve`, but you don't need to pass router.
 
 #### <a name="match-sub">`::match`
 Works as bide's `match`, but you don't need to pass router.
@@ -102,13 +105,13 @@ Works as bide's `match`, but you don't need to pass router.
 Return's bide's router.
 
 #### <a name="html5?-sub">`::html5?`
-True if using HTML5 History. 
+True if using HTML5 History.
 
 ## district.ui.router.events
 re-frame events provided by this module:
 
 #### <a name="active-page-changed-evt">`::active-page-changed`
-Event fired when active page has been changed. Use this event to hook into event flow.  
+Event fired when active page has been changed. Use this event to hook into event flow.
 
 #### <a name="watch-active-page-evt">`::watch-active-page`
 Event to call [::watch-active-page](watch-active-page-fx) effect.
@@ -130,15 +133,15 @@ This is special type of effect useful for hooking into [active-page-changed](#ac
 [re-frame-forward-events-fx](https://github.com/Day8/re-frame-forward-events-fx), but instead of dispatching being based on events, it
 is based on route name, params and query. This is useful when, for example, your module needs to load data when user visits certain page.
 
-As a param you pass collection of maps containing following keys: 
+As a param you pass collection of maps containing following keys:
 * `:id` ID of watcher, so you can later unwatch using this ID
 * `:name` Route name dispatching will be based on. You can pass also collection of routes or a predicate function.
 * `:params` Route params dispatching will be based on. You can also pass predicate function.
 * `:query` Route query dispatching will be based on. You can also pass predicate function.
-* `:dispatch` Dispatch fired when certain name/params/query is hit. Fired event will get name, params, query as last 3 args.  
+* `:dispatch` Dispatch fired when certain name/params/query is hit. Fired event will get name, params, query as last 3 args.
 * `:dispatch-n` Dispatches fired when certain name/params/query is hit.
 
-You can do dispatching based on either name, params or query, or any combination of two or three of them.  
+You can do dispatching based on either name, params or query, or any combination of two or three of them.
 
 ```clojure
 (ns my.district
@@ -154,7 +157,7 @@ You can do dispatching based on either name, params or query, or any combination
     {::router-effects/watch-active-page [{:id :watcher1
                                           :name :route/b
                                           :dispatch [::some-event]}]}))
-                                   
+
 (reg-event-fx
   ::my-event
   (fn []
@@ -163,18 +166,18 @@ You can do dispatching based on either name, params or query, or any combination
                                           :name :route/c
                                           :params {:a 1}
                                           :dispatch [::some-event]}]}))
-                                   
+
 (reg-event-fx
   ::my-event
   (fn []
     ;; When any page with {:some-param "abc"} query is visited ::some-event will be fired
     {::router-effects/watch-active-page [{:id :watcher1
                                           :query {:some-param "abc"}
-                                          :dispatch [::some-event]}]}))                                                                      
+                                          :dispatch [::some-event]}]}))
 ```
 
 #### <a name="unwatch-active-page-fx">`::unwatch-active-page`
-Unwatches previously set watcher based on `:id`. 
+Unwatches previously set watcher based on `:id`.
 
 ```clojure
 (reg-event-fx
@@ -187,12 +190,12 @@ Unwatches previously set watcher based on `:id`.
 Reframe effect to call bide's `navigate!` function.
 
 #### <a name="replace-fx">`::replace`
-Reframe effect to call bide's `replace!` function.  
+Reframe effect to call bide's `replace!` function.
 
 
 ## district.ui.router.queries
-DB queries provided by this module:   
-*You should use them in your events, instead of trying to get this module's 
+DB queries provided by this module:
+*You should use them in your events, instead of trying to get this module's
 data directly with `get-in` into re-frame db.*
 
 #### <a name="active-page">`active-page [db]`
@@ -223,10 +226,10 @@ Works the same way as sub `::bide-router`
 Works the same way as sub `::html5?`
 
 #### <a name="assoc-bide-router">`assoc-bide-router [db bide-router]`
-Associates new bide router and returns new re-frame db. 
+Associates new bide router and returns new re-frame db.
 
 #### <a name="assoc-html5">`assoc-html5 [db html5?]`
-Associates whether the module is using html5 history or not. 
+Associates whether the module is using html5 history or not.
 
 ## district.ui.router.utils
 Util functions provided by this module:
@@ -235,20 +238,20 @@ Util functions provided by this module:
 Serves as a wrapper for instantly derefed sub `::resolve`.
 
 #### <a name="match-util">`match [path]`
-Serves as a wrapper for instantly derefed sub `::match`. 
+Serves as a wrapper for instantly derefed sub `::match`.
 
 ```clojure
 (ns my-district.core
     (:require [mount.core :as mount]
               [district.ui.router]
               [district.ui.router.utils :as utils]))
-              
+
   (-> (mount/with-args
         {:router {:routes [["/a" :route/a]
                            ["/b/:b" :route/b]]
                   :default-route :route/a}})
     (mount/start))
-    
+
 (utils/resolve :route/a)
 ;; => "/a"
 
@@ -264,7 +267,7 @@ Multimethod to define pages upon. `district.ui.component.router` component will 
 
 ```clojure
 (ns my-district.core
-  (:require 
+  (:require
     [district.ui.component.page :refer [page]]))
 
 (defmethod page :route/home []
@@ -279,7 +282,7 @@ Components that switches pages (as defined via `district.ui.component.page`) bas
   (:require
     [reagent.core :as r]
     [mount.core :as mount]
-    [district.ui.router] 
+    [district.ui.router]
     [district.ui.component.page :refer [page]]
     [district.ui.component.router :refer [router]]))
 
@@ -291,7 +294,7 @@ Components that switches pages (as defined via `district.ui.component.page`) bas
 
 (defmethod page :route/home []
   [:div "Welcome to Home Page"])
-  
+
 (defmethod page :route/user []
   [:div "Welcome to User Page"])
 
