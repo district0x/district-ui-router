@@ -1,4 +1,4 @@
-(defproject district0x/district-ui-router "1.0.4"
+(defproject district0x/district-ui-router "1.0.5"
   :description "district UI module for URI routing"
   :url "https://github.com/district0x/district-ui-router"
   :license {:name "Eclipse Public License"
@@ -8,7 +8,8 @@
                  [funcool/bide "1.6.0"]
                  [mount "0.1.11"]
                  [org.clojure/clojurescript "1.9.946"]
-                 [re-frame "0.10.2"]]
+                 [re-frame "0.10.2"]
+                 [district0x/re-frame-window-fx "1.0.2"]]
 
   :doo {:paths {:karma "./node_modules/karma/bin/karma"}}
 
