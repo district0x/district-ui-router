@@ -9,6 +9,7 @@
                  [mount "0.1.16"]
                  [re-frame "0.12.0"]
 
+                 [funcool/cuerdas "2.2.0"]
                  [funcool/bide "1.6.0"]
                  [day8.re-frame/async-flow-fx "0.1.0"]
                  
@@ -17,6 +18,8 @@
   :doo {:paths {:karma "./node_modules/karma/bin/karma"}
         :build "tests"
         :alias {:default [:chrome]}}
+
+  :clean-targets ^{:protect false} ["target" "tests-output"]
 
   :npm {:devDependencies [[karma "1.7.1"]
                           [karma-chrome-launcher "2.2.0"]

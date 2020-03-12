@@ -15,3 +15,4 @@ pom.xml.asc
 /tests-output/
 /district-ui-router.iml
 package-lock.json
+process.yml
