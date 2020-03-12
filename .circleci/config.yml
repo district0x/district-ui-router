@@ -8,19 +8,35 @@ jobs:
       - image: district0x/cljs-dev:latest
     steps:
       - checkout
-      - restore_cache:
-          name: Restore npm package cache
-          keys:
-            - npm-packages-{{ checksum "package-lock.json" }}
-      - run:
-          name: Install node modules
-          command: npm install
-      - save_cache:
-          name: Save npm package cache
-          key: npm-packages-{{ checksum "package-lock.json" }}
-          paths:
-            - ./node_modules/
-      - run: lein doo chrome-headless "browser-tests" once
+      
+      # Install Clojure Dependencies from Maven (cached)
+      #- restore_cache:
+      #    name: Restore m2 package cache
+      #    keys:
+      #      - maven-dependencies-{{ checksum "project.clj" }}
+      #      # fallback to using the latest cache if no exact match is found
+      #      - maven-dependencies-
+      - run: lein deps
+      #- save_cache:
+      #    name: Save m2 package cache
+      #    paths:
+      #      - ~/.m2
+      #    key: maven-dependencies-{{ checksum "project.clj" }}
+
+      # Install NodeJS Dependencies from NPM (cached)
+      #- restore_cache:
+      #    name: Restore npm package cache
+      #    keys:
+      #      - npm-packages-{{ checksum "package-lock.json" }}
+      - run: lein npm install
+      #- save_cache:
+      #    name: Save npm package cache
+      #    key: npm-packages-{{ checksum "package-lock.json" }}
+      #    paths:
+      #      - ./node_modules/
+
+      # Begin
+      - run: make test
 
   deploy:
    machine: true

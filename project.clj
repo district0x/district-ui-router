@@ -1,4 +1,4 @@
-(defproject district0x/district-ui-router "1.0.6"
+(defproject district0x/district-ui-router "1.0.6-SNAPSHOT"
   :description "district UI module for URI routing"
   :url "https://github.com/district0x/district-ui-router"
   :license {:name "Eclipse Public License"
@@ -21,10 +21,10 @@
 
   :clean-targets ^{:protect false} ["target" "tests-output"]
 
-  :npm {:devDependencies [[karma "1.7.1"]
-                          [karma-chrome-launcher "2.2.0"]
-                          [karma-cli "1.0.1"]
-                          [karma-cljs-test "0.1.0"]]}
+  :npm {:devDependencies [[karma "^4.4.1"]
+                          [karma-chrome-launcher "^3.1.0"]
+                          [karma-cli "^2.0.0"]
+                          [karma-cljs-test "^0.1.0"]]}
 
   :profiles {:dev {:dependencies [[com.cemerick/piggieback "0.2.2"]
                                   [day8.re-frame/test "0.1.5"]
