@@ -22,15 +22,11 @@ deps:
 test:
 	lein doo once
 
-process.yml: .circleci/config.yml
-	circleci config process .circleci/config.yml > process.yml
-
-test-circleci: process.yml
-	circleci local execute -c process.yml --job test
+test-circleci:
+	circleci local execute --job test
 
 clean:
 	lein clean
-	rm -f process.yml
 
 clean-all: clean
 	rm -rf node_modules

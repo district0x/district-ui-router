@@ -17,7 +17,7 @@
 
   :doo {:paths {:karma "./node_modules/karma/bin/karma"}
         :build "tests"
-        :alias {:default [:chrome]}}
+        :alias {:default [:chrome-headless]}}
 
   :clean-targets ^{:protect false} ["target" "tests-output"]
 
