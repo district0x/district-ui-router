@@ -1,14 +1,21 @@
 (ns tests.all
   (:require
-    [cljs.test :refer [deftest is testing run-tests async use-fixtures]]
-    [day8.re-frame.test :refer [run-test-async run-test-sync wait-for]]
-    [district.ui.router.events :as events]
-    [district.ui.router.subs :as subs]
-    [district.ui.router.utils :as utils]
-    [district.ui.router.effects :as effects]
-    [district.ui.router]
-    [mount.core :as mount]
-    [re-frame.core :refer [reg-event-fx dispatch-sync subscribe reg-cofx reg-sub dispatch trim-v]]))
+   [cuerdas.core :as str]
+   [cljs.test :refer [deftest is testing run-tests async use-fixtures]]
+   [day8.re-frame.test :refer [run-test-async run-test-sync wait-for]]
+   [district.ui.router.events :as events]
+   [district.ui.router.subs :as subs]
+   [district.ui.router.utils :as utils]
+   [district.ui.router.effects :as effects]
+   [district.ui.router]
+   [mount.core :as mount]
+   [re-frame.core :as re :refer [reg-event-fx dispatch-sync subscribe reg-cofx reg-sub dispatch trim-v]]))
+
+(defn window-params
+  []
+  (let [search (aget js/window "location" "search")]
+    (-> search
+        (str/trim))))
 
 (use-fixtures
   :each

@@ -1,6 +1,6 @@
 # district-ui-router
 
-[![Build Status](https://travis-ci.org/district0x/district-ui-router.svg?branch=master)](https://travis-ci.org/district0x/district-ui-router)
+[![CircleCI](https://circleci.com/gh/district0x/district-ui-router.svg?style=svg)](https://circleci.com/gh/district0x/district-ui-router)
 
 Clojurescript [re-mount](https://github.com/district0x/d0x-INFRA/blob/master/re-mount.md) module,
 that provides routing functionality for UI. This module currently utilises [bide](https://github.com/funcool/bide) routing library.
