@@ -9,7 +9,7 @@ based on currently active page.
 
 ## Installation
 
-Add `[district0x/district-ui-router "1.0.5"]` into your project.clj
+Add `[district0x/district-ui-router "VERSION"]` into your project.clj
 
 Include `[district.ui.router]` in your CLJS file, where you use `mount/start`
 
