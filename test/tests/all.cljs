@@ -174,7 +174,7 @@
        (wait-for
         [::events/active-page-changed]
 
-        (is (= (window-query-params) {:foo "bar"}))
+        (is (= (window-query-params) {:foo "baz"}))
         (is (= @active-page-name :route/a))
         (is (= @active-page-params nil))
         (is (= @active-page-query {:foo "baz"}))))))))

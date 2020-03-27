@@ -10,7 +10,7 @@
                  [re-frame "0.12.0"]
 
                  [funcool/cuerdas "2.2.0"]
-                 [funcool/bide "1.6.0"]
+                 [district0x/bide "1.6.1"]
                  [day8.re-frame/async-flow-fx "0.1.0"]
                  
                  [district0x/re-frame-window-fx "1.0.2"]]
