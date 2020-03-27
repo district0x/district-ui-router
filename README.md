@@ -1,9 +1,11 @@
 # district-ui-router
 
 [![CircleCI](https://circleci.com/gh/district0x/district-ui-router.svg?style=svg)](https://circleci.com/gh/district0x/district-ui-router)
+[![Clojars Project](https://img.shields.io/clojars/v/district0x/district-ui-router.svg)](https://clojars.org/district0x/district-ui-router)
 
 Clojurescript [re-mount](https://github.com/district0x/d0x-INFRA/blob/master/re-mount.md) module,
-that provides routing functionality for UI. This module currently utilises [bide](https://github.com/funcool/bide) routing library.
+that provides routing functionality for UI. This module currently
+utilises a forked [bide](https://github.com/district0x/bide) routing library.
 It also provides 2 [reagent](https://github.com/reagent-project/reagent) components helpful for switching pages in UI
 based on currently active page.
 
