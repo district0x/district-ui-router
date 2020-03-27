@@ -6,18 +6,14 @@ jobs:
       # Primary container image where all steps run.
       - image: district0x/cljs-dev:latest
     steps:
-      #- setup_remote_docker
-
       - checkout
       
       # Install Clojure Dependencies from Maven
-      - run: lein deps
-
       # Install NodeJS Dependencies from NPM
-      - run: lein npm install
+      - run: make deps
 
       # Begin
-      - run: make test
+      - run: make test-headless
 
   deploy:
    machine: true
@@ -29,12 +25,20 @@ jobs:
 
 workflows:
   version: 2
-  test_and_deploy:
+  test_maybe_deploy_master_with_approval:
     jobs:
       - test
-      - deploy:
+      - hold:
+          type: approval
           requires:
             - test
+          filters:
+            branches:
+              only: master
+      - deploy:
+          context: district0x
+          requires:
+            - hold
           filters:
             branches:
               only: master

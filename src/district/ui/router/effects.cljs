@@ -2,7 +2,7 @@
   (:require
     [bide.core :as bide]
     [cljs.spec.alpha :as s]
-    [re-frame.core :refer [reg-fx remove-post-event-callback add-post-event-callback dispatch]]))
+    [re-frame.core :as re :refer [reg-fx dispatch]]))
 
 (reg-fx
   ::navigate
@@ -58,7 +58,7 @@
     (let [watchers (if (sequential? watchers) watchers [watchers])]
       (s/assert ::watchers watchers)
       (doseq [{:keys [:id] :as watch-opts} watchers]
-        (add-post-event-callback id (post-event-callback-fn watch-opts))))))
+        (re/add-post-event-callback id (post-event-callback-fn watch-opts))))))
 
 
 (reg-fx
@@ -67,5 +67,5 @@
     (let [watchers (if (sequential? watchers) watchers [watchers])]
       (s/assert ::watchers watchers)
       (doseq [{:keys [:id]} watchers]
-        (remove-post-event-callback id)))))
+        (re/remove-post-event-callback id)))))
 
