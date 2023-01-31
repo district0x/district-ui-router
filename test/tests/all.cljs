@@ -12,7 +12,9 @@
    [district.ui.router.effects :as effects]
    [district.ui.router]
    [mount.core :as mount]))
-   
+
+
+(def html5-host "localhost")
 
 (defn window-query-params
   []
@@ -69,7 +71,7 @@
      (-> (mount/with-args {:router {:routes [["/a" :route/a]
                                              ["/b/:b" :route/b]]
                                     :default-route :route/a
-                                    :html5-hosts "localhost"}})
+                                    :html5-hosts html5-host}})
          (mount/start))
 
 
@@ -111,7 +113,7 @@
    (-> (mount/with-args {:router {:routes [["/a" :route/a]
                                            ["/b/:b" :route/b]]
                                   :default-route :route/a
-                                  :html5-hosts ["localhost"]}})
+                                  :html5-hosts [html5-host]}})
        (mount/start))
 
    (testing "Watching based on route name"
@@ -158,7 +160,7 @@
      (-> (mount/with-args {:router {:routes [["/a" :route/a]
                                              ["/b/:b" :route/b]]
                                     :default-route :route/a
-                                    :html5-hosts "localhost"}})
+                                    :html5-hosts html5-host}})
          (mount/start))
      (wait-for
       [::events/active-page-changed]

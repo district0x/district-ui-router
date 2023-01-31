@@ -1,0 +1,32 @@
+{:paths ["src" "test"],
+ :mvn/repos
+ {"central" {:url "https://repo1.maven.org/maven2/"},
+  "clojars" {:url "https://clojars.org/repo"}},
+ :deps
+ {org.clojure/clojure {:mvn/version "1.11.1"},
+  thheller/shadow-cljs {:mvn/version "2.19.3"},
+  mount/mount {:mvn/version "0.1.16"},
+  funcool/cuerdas {:mvn/version "2.2.0"}
+  funcool/bide {:mvn/version "1.7.0"}
+  day8.re-frame/test {:mvn/version "0.1.5"},
+  district0x/re-frame-window-fx {:mvn/version "1.0.2"}
+  cljs-react-test/cljs-react-test {:mvn/version "0.1.4-SNAPSHOT"},
+  day8.re-frame/async-flow-fx {:mvn/version "0.1.0"}
+  re-frame/re-frame {:mvn/version "1.2.0"}},
+ :install-deps true,
+ :aliases
+ {:build
+  {:deps
+   {io.github.clojure/tools.build {:tag "v0.8.1", :sha "7d40500"},
+    slipset/deps-deploy {:mvn/version "RELEASE"}},
+   :ns-default build},
+  :deploy
+  {:replace-deps {slipset/deps-deploy {:mvn/version "RELEASE"}},
+   :exec-fn deps-deploy.deps-deploy/deploy,
+   :exec-args
+   {:installer :remote,
+    :artifact "target/district-ui-router-1.1.0-SNAPSHOT.jar"}},
+  :local-deps {:override-deps {}},
+  :shadow-cljs
+  {:extra-deps {thheller/shadow-cljs {:mvn/version "2.19.8"}},
+   :main-opts ["-m" "shadow.cljs.devtools.cli"]}}}

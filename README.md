@@ -1,6 +1,6 @@
 # district-ui-router
 
-[![CircleCI](https://circleci.com/gh/district0x/district-ui-router.svg?style=svg)](https://circleci.com/gh/district0x/district-ui-router)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/district0x/district-ui-router/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/district0x/district-ui-router/tree/master)
 [![Clojars Project](https://img.shields.io/clojars/v/district0x/district-ui-router.svg)](https://clojars.org/district0x/district-ui-router)
 
 Clojurescript [re-mount](https://github.com/district0x/d0x-INFRA/blob/master/re-mount.md) module,
